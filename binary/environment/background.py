@@ -14,7 +14,7 @@ class Background():
 
     def __init__(self, path, screen=None):
         self.surface = image.load(path)
-        self.screen_surface = screen
+        self.screen = screen
 
         self.coords = (0, 0)
     
@@ -22,6 +22,6 @@ class Background():
         self.render()
     
     def render(self):
-        self.screen_surface.blit(self.surface, self.coords)
+        self.screen.blit(self.surface, self.coords)
         print("Log: Background render")
         
