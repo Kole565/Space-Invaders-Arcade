@@ -1,35 +1,77 @@
-from pygame import image
-from pygame import transform
-
-from .alien import Alien
+from binary.interfaces.moveable import Moveable
+from binary.interfaces.renderable import Renderable
 
 
-class SmallAlien(Alien):
+class SmallAlien(Moveable, Renderable):
 
-    texture = "./resource/image/dynamic/alliens/small_alien.png"
-    size = 25
+    texture_path = "./resource/image/dynamic/alliens/small_alien.png"
+    size = (50, 30)
 
-    def __init__(self, spawn_pos, screen=None):
-        Alien.__init__(self, spawn_pos)
+    vertical_speed = 1
+    horizontal_speed = 1
+    row_step = 20
 
-        self.screen = screen
-        self.init_texture()
+    def __init__(self, spawn_pos=(0, 0), screen=None):
+        Moveable.__init__(self, spawn_pos)
+        Renderable.__init__(self, screen)
+
+        self.set_borders(0, screen.get_width())
+        self.set_start_direction_and_aim()
     
-    def init_texture(self):
-        pre_texture = image.load(self.texture)
-        x, y = pre_texture.get_size()
-        x, y = 2, 1
-        size = (self.size * x / y, self.size * y / x)
-        
-        self.texture = transform.scale(pre_texture, size)
+    def set_borders(self, left, right):
+        self.left_border = left
+        self.right_border = right
     
+    def set_start_direction_and_aim(self):
+        self.direction = [1, 0]
+        self.vertical_aim = 9**9
+
     def update(self):
+        self.moving()
         self.render()
-        # self.test_move()
     
-    def render(self):
-        self.screen.blit(self.texture, self.coords)
-        print("Log: SmallAlien render")        
+    def moving(self):
+        self.set_direction()
+        self.move_by_direction()
     
-    # def test_move(self):
-    #     self.move_relative(1, 0)
+    def set_direction(self):
+        if self.direction[0] != 0 and self.is_beyond_horizontal_borders():
+            self.set_down_direction()
+            self.set_vertical_aim()
+        
+        elif self.is_beyond_vertical_aim():
+            self.set_left_or_right_direction_by_distance()
+            self.set_vertical_aim()
+    
+    def is_beyond_horizontal_borders(self):
+        if self.is_beyond_left_border() or self.is_beyond_right_border():
+            return True
+    
+    def is_beyond_right_border(self):
+        if self.coords[0] >= self.right_border - self.size[0]:
+            return True
+    
+    def is_beyond_left_border(self):
+        if self.coords[0] <= self.left_border:
+            return True
+    
+    def is_beyond_vertical_aim(self):
+        if self.coords[1] >= self.vertical_aim:
+            return True
+    
+    def set_down_direction(self):
+        self.direction[0] = 0
+        self.direction[1] = 1
+    
+    def set_left_or_right_direction_by_distance(self):
+        if (abs(self.coords[0] - self.left_border) <
+            abs(self.coords[0] - self.right_border)):
+            self.direction[0] = 1
+        else:
+            self.direction[0] = -1
+
+        self.direction[1] = 0
+    
+    def set_vertical_aim(self):
+        self.vertical_aim = self.coords[1] + self.row_step
+        
