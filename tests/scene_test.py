@@ -9,8 +9,7 @@ import unittest
 
 from binary.environment.background import Background
 from binary.template.scene import Scene
-
-from pygame import display
+from pygame import display, event
 
 
 class TestScene(unittest.TestCase):
@@ -18,8 +17,8 @@ class TestScene(unittest.TestCase):
     """Provide tests for scene"""
 
     def setUp(self):
-        screen = display.set_mode((400, 400))        
-        back = Background("./resource/image/static/test_back.png", screen)
+        screen = display.set_mode((100, 100))        
+        back = Background(screen)
         ship = Updateable(screen)
         alien = Updateable(screen)
         some_gui = Updateable(screen)
@@ -34,6 +33,9 @@ class TestScene(unittest.TestCase):
         self.assertTrue(self.scene.objects)
         self.assertTrue(self.scene.gui)
     
+    def test_update(self):
+        self.scene.update()
+    
     def test_update_environment(self):
         self.scene.update_environment()
     
@@ -43,14 +45,23 @@ class TestScene(unittest.TestCase):
     def test_update_gui(self):
         self.scene.update_gui()
     
+    def test_update_screen(self):
+        self.scene.update_screen()
+    
     def test_update_list(self):
         self.scene.update_list([Updateable()])
     
-    def test_update(self):
-        self.scene.update()
+    def test_exit_check(self):
+        events = event.get()
+        self.scene.exit_check(events)
     
-    def test_update(self):
-        self.scene.update()
+    def test_exit(self):
+        try:
+            self.scene.exit()
+        except SystemExit:
+            pass
+        else:
+            self.fail()
 
 
 class Updateable:
