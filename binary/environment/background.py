@@ -13,7 +13,7 @@ class Background(Renderable):
 
     texture_path = "./resource/image/static/test_back.png"
 
-    def __init__(self, screen=None, texture_path=None):
+    def __init__(self, screen, texture_path=None):
         self.screen = screen
         if texture_path:
             self.texture_path = texture_path

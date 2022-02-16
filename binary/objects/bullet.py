@@ -12,7 +12,7 @@ class Bullet(Moveable, Renderable):
     vertical_speed = 2
     horizontal_speed = 0
 
-    def __init__(self, spawn_pos=(0, 0), screen=None):
+    def __init__(self, screen, spawn_pos=(0, 0)):
         Moveable.__init__(self, spawn_pos)
         Renderable.__init__(self, screen)
 

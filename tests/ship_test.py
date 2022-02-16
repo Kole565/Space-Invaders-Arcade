@@ -14,7 +14,7 @@ class TestShip(unittest.TestCase):
 
     def setUp(self):
         screen = display.set_mode((100, 100))
-        self.ship = Ship((0, 0), screen)
+        self.ship = Ship(screen)
 
     def test_create(self):
         self.assertTrue(self.ship)

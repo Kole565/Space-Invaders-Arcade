@@ -14,7 +14,7 @@ class TestSmallAlien(unittest.TestCase):
 
     def setUp(self):
         screen = display.set_mode((100, 100))
-        self.alien = SmallAlien((0, 0), screen)
+        self.alien = SmallAlien(screen)
     
     def test_borders(self):
         left = 0
