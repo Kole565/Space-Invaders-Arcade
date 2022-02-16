@@ -5,18 +5,19 @@ import pygame
 
 class Scene:
 
-    """Container for updateable objects on screen"""
+    """Contain, update objects on screen"""
     
-    def __init__(self, screen=None, environment=[], objects=[], gui=[]):
+    def __init__(self, screen, environment=[], objects=[], gui=[]):
         self.screen = screen
         
         self.environment = environment
         self.objects = objects
         self.gui = gui
 
+        self.events = []
+
     def update(self):
-        events = pygame.event.get()
-        self.exit_check(events)
+        self.exit_check()
         
         self.update_environment()
         self.update_objects()
@@ -24,8 +25,9 @@ class Scene:
 
         self.update_screen()
     
-    def exit_check(self, events):
+    def exit_check(self, ):
         """Exit game by input"""
+        events = pygame.event.get()
         for event in events:
             if (event.type == pygame.QUIT or
                (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE)):

@@ -12,10 +12,16 @@ class Gun(Moveable):
         self.screen = screen
         self.parent = parent
 
-        Moveable.__init__(self, )
+        Moveable.__init__(self)
 
         self.last_shoot = time()
         self.set_mount_offset()
+
+    def set_mount_offset(self):
+        offset = [0, 0]
+        offset[0] = self.parent.size[0] / 2
+
+        self.mount_offset = offset
 
     def update(self):
         self.moving()
@@ -25,12 +31,6 @@ class Gun(Moveable):
         y = self.parent.coords[1] + self.mount_offset[1]
 
         self.coords = (x, y)
-    
-    def set_mount_offset(self):
-        offset = [0, 0]
-        offset[0] = self.parent.size[0] / 2
-
-        self.mount_offset = offset
         
     def shooting(self):
         """Abstract"""
