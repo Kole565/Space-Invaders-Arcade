@@ -77,5 +77,5 @@ class BulletGun(UserGun):
     def shoot(self):
         super().shoot()
 
-        self.bullets.append(Bullet(self.coords, self.screen))
+        self.bullets.append(Bullet(self.screen, self.coords))
         

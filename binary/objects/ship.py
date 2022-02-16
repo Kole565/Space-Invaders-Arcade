@@ -12,8 +12,8 @@ class Ship(MoveableByInput, Renderable):
     horizontal_speed = 1
 
     def __init__(self, screen, spawn_pos=(0, 0)):
-        MoveableByInput.__init__(self, spawn_pos)
         Renderable.__init__(self, screen)
+        MoveableByInput.__init__(self, spawn_pos)
 
     def update(self):
         self.move()

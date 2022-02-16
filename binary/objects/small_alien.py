@@ -11,7 +11,7 @@ class SmallAlien(Moveable, Renderable):
     horizontal_speed = 1
     row_step = 20
 
-    def __init__(self, spawn_pos=(0, 0), screen=None):
+    def __init__(self, screen, spawn_pos=(0, 0)):
         Moveable.__init__(self, spawn_pos)
         Renderable.__init__(self, screen)
 

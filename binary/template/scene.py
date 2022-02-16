@@ -25,7 +25,7 @@ class Scene:
 
         self.update_screen()
     
-    def exit_check(self, ):
+    def exit_check(self):
         """Exit game by input"""
         events = pygame.event.get()
         for event in events:
