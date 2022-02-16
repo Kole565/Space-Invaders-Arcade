@@ -1,9 +1,10 @@
 from binary.interfaces.moveable import MoveableByInput
 from binary.interfaces.renderable import Renderable
+from binary.interfaces.collisionable import Collisionable
 from binary.objects.gun import BulletGun
 
 
-class Ship(MoveableByInput, Renderable):
+class Ship(MoveableByInput, Renderable, Collisionable):
 
     texture_path = "./resource/image/dynamic/ship/ship.png"
     size = (50, 50)
@@ -14,6 +15,7 @@ class Ship(MoveableByInput, Renderable):
     def __init__(self, screen, spawn_pos=(0, 0)):
         Renderable.__init__(self, screen)
         MoveableByInput.__init__(self, spawn_pos)
+        Collisionable.__init__(self, screen)
 
     def update(self):
         self.move()
@@ -36,4 +38,7 @@ class Attacker(Ship):
         super().update()
 
         self.gun.update()
+    
+    def collision_check(self, objects):
+        self.gun.collision_check(objects)
         

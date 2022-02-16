@@ -1,5 +1,6 @@
 from binary.interfaces.moveable import Moveable
 from binary.interfaces.renderable import Renderable
+from binary.interfaces.collisionable import Collisionable
 from binary.objects.bullet import Bullet
 
 import pygame
@@ -41,6 +42,9 @@ class Gun(Moveable):
     
     def shoot(self):
         self.last_shoot = time()
+    
+    def collision_check(self, objects):
+        pass
 
 
 class UserGun(Gun):
@@ -78,4 +82,8 @@ class BulletGun(UserGun):
         super().shoot()
 
         self.bullets.append(Bullet(self.screen, self.coords))
+    
+    def collision_check(self, objects):
+        for bullet in self.bullets:
+            bullet.collision_check(objects)
         

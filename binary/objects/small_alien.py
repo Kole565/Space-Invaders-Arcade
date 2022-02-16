@@ -1,8 +1,9 @@
 from binary.interfaces.moveable import Moveable
 from binary.interfaces.renderable import Renderable
+from binary.interfaces.collisionable import Collisionable
 
 
-class SmallAlien(Moveable, Renderable):
+class SmallAlien(Moveable, Renderable, Collisionable):
 
     texture_path = "./resource/image/dynamic/alliens/small_alien.png"
     size = (50, 30)
@@ -14,6 +15,7 @@ class SmallAlien(Moveable, Renderable):
     def __init__(self, screen, spawn_pos=(0, 0)):
         Moveable.__init__(self, spawn_pos)
         Renderable.__init__(self, screen)
+        Collisionable.__init__(self, screen)
 
         self.set_borders(0, screen.get_width())
         self.set_start_direction_and_aim()
