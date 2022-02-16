@@ -11,11 +11,11 @@ class Renderable:
         self.init_image_surface()
 
     def init_image_surface(self):
-        surface = self.try_get_image_if_none_return_default()
+        surface = self.try_load_image_if_none_return_default()
         
         self.surface = transform.scale(surface, self.size)
     
-    def try_get_image_if_none_return_default(self):
+    def try_load_image_if_none_return_default(self):
         try:
             surface = image.load(self.texture_path)
         except (FileNotFoundError, AttributeError):

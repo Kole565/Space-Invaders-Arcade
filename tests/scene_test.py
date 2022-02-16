@@ -9,7 +9,7 @@ import unittest
 
 from binary.environment.background import Background
 from binary.template.scene import Scene
-from pygame import display, event
+from pygame import display
 
 
 class TestScene(unittest.TestCase):
@@ -52,8 +52,7 @@ class TestScene(unittest.TestCase):
         self.scene.update_list([Updateable()])
     
     def test_exit_check(self):
-        events = event.get()
-        self.scene.exit_check(events)
+        self.scene.exit_check()
     
     def test_exit(self):
         try:
