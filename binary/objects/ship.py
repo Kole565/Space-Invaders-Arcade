@@ -6,8 +6,8 @@ from binary.objects.gun import BulletGun
 
 class Ship(MoveableByInput, Renderable, Collisionable):
 
-    texture_path = "./resource/image/dynamic/ship/ship.png"
-    size = (50, 50)
+    texture_path = "./resource/image/dynamic/Ship.png"
+    size = (75, 75)
 
     vertical_speed = 1
     horizontal_speed = 1
@@ -24,7 +24,8 @@ class Ship(MoveableByInput, Renderable, Collisionable):
 
 class Attacker(Ship):
     
-    size = (30, 30)
+    texture_path = "./resource/image/dynamic/Attacker.png"
+    size = (50, 50)
 
     vertical_speed = 2
     horizontal_speed = 2
