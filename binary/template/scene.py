@@ -64,14 +64,5 @@ class Scene:
                 collisionable.collision_check(objects)
     
     def is_can_check_collision(self):
-        if not self.collision_tick:
-            self.collision_tick += 1
-            return True
-        else:
-            if self.collision_tick == self.collision_tick_speed:
-                self.collision_tick = 0
-                return False
-            else:
-                self.collision_tick += 1
-                return False
+        return True
             
