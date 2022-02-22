@@ -7,7 +7,7 @@ import pygame
 
 class Bullet(Moveable, Renderable, Collisionable):
 
-    texture_path = "./resource/image/dynamic/yellow_bullet.png"
+    texture_path = "./resource/image/dynamic/YellowBullet.png"
     size = (5, 20)
 
     vertical_speed = 2
@@ -29,12 +29,8 @@ class Bullet(Moveable, Renderable, Collisionable):
     
     def moving(self):
         self.move_by_direction()
-    
-    def collision_check(self, objects):
-        if self in objects:
-            objects.remove(self)
 
-        for object in objects:
-            if self.rect.colliderect(object.rect):
-                print("{1} collide with {0}".format(self, object))
-            
+    def out_of_borders(self):
+        if self.coords[1] < -self.size[1]:
+            return True
+        return False
