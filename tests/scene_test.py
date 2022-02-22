@@ -19,9 +19,9 @@ class TestScene(unittest.TestCase):
     def setUp(self):
         screen = display.set_mode((100, 100))        
         back = Background(screen)
-        ship = Updateable(screen)
-        alien = Updateable(screen)
-        some_gui = Updateable(screen)
+        ship = TestObject(screen)
+        alien = TestObject(screen)
+        some_gui = TestObject(screen)
         
         self.scene = Scene(screen, [back], [ship, alien], [some_gui])
 
@@ -49,7 +49,7 @@ class TestScene(unittest.TestCase):
         self.scene.update_screen()
     
     def test_update_list(self):
-        self.scene.update_list([Updateable()])
+        self.scene.update_list([TestObject()])
     
     def test_exit_check(self):
         self.scene.exit_check()
@@ -63,11 +63,14 @@ class TestScene(unittest.TestCase):
             self.fail()
 
 
-class Updateable:
+class TestObject:
 
     def __init__(self, screen=None):
         self.screen = screen
     
     def update(self):
+        pass
+
+    def collision_check(self, objects):
         pass
     
