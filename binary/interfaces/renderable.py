@@ -12,8 +12,9 @@ class Renderable:
 
     def init_image_surface(self):
         surface = self.try_load_image_if_none_return_default()
-        
+                
         self.surface = transform.scale(surface, self.size)
+        self.rotate_surface_if_need()
     
     def try_load_image_if_none_return_default(self):
         try:
@@ -22,6 +23,10 @@ class Renderable:
             surface = image.load(self.texture_default_path)
         
         return surface
+    
+    def rotate_surface_if_need(self):
+        if hasattr(self, "rotation"):
+            self.surface = transform.rotate(self.surface, self.rotation)
 
     def render(self):
         self.screen.blit(self.surface, self.coords)
