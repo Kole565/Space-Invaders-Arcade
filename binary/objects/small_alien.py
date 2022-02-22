@@ -5,8 +5,9 @@ from binary.interfaces.collisionable import Collisionable
 
 class SmallAlien(Moveable, Renderable, Collisionable):
 
-    texture_path = "./resource/image/dynamic/alliens/small_alien.png"
-    size = (50, 30)
+    texture_path = "./resource/image/dynamic/SmallAlien.png"
+    size = (40, 40)
+    rotation = 180
 
     vertical_speed = 1
     horizontal_speed = 1
@@ -19,6 +20,9 @@ class SmallAlien(Moveable, Renderable, Collisionable):
 
         self.set_borders(0, screen.get_width())
         self.set_start_direction_and_aim()
+    
+    def collision_check(self, collisionables):
+        pass
     
     def set_borders(self, left, right):
         self.left_border = left
