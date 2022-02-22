@@ -1,13 +1,13 @@
 class Collisionable:
 
     def __init__(self, screen):
-        print("__init__ from {:s}".format(self.__class__.__name__))
         self.rect = self.surface.get_rect()
     
-    def collision_check(self, list):
-        # print(list)
-        pass
-        # for collisionable in list:
-        #     for other in list:
-        #         if collisionable.rect.colliderect(other):
-        #             print("{:} collide with {:}".format(collisionable, other))
+    def collision_check(self, collisionables):
+        copy = collisionables[:]
+        if self in copy:
+            copy.remove(self)
+
+        for object in copy:
+            if self.rect.colliderect(object.rect):
+                print("{1} collide with {0}".format(self, object))
